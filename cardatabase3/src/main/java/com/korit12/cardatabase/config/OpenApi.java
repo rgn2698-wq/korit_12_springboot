@@ -1,0 +1,21 @@
+package com.korit12.cardatabase.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenApi {
+    @Bean
+    public OpenAPI cardatabaseAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                .title("Car Database API")
+                .description("자동차 및 소유주 관리를 위한 API명세서")
+                .version("1.0.0")
+
+        );
+
+    }
+}
