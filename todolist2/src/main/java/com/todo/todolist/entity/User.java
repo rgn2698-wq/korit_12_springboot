@@ -1,16 +1,16 @@
-package com.todolist.todolist.domain;
+package com.todo.todolist.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name= "users")
 @Data
-@NoArgsConstructor
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -20,14 +20,16 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String roles;
+    private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Todo> todolist = new ArrayList<>();
+    private List<Todo> todos;
 
-    public User(String username, String password, String roles) {
+    public User() {}
+
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 }

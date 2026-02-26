@@ -1,25 +1,27 @@
-package com.todolist.todolist.domain;
-
+package com.todo.todolist.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 @Entity
 @Data
-@NoArgsConstructor
-@ToString(exclude = "user")
 public class Todo {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String content;
-    private boolean isCompleted;
+
+    private boolean isCompleted = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
+
+    public Todo() {}
 
     public Todo(String content, User user) {
         this.content = content;
